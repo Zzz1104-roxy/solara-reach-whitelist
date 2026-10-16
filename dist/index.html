@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="白名单触达平台交互原型" />
+    <title>Solara Reach · 白名单触达平台</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">S</div>
+          <div><strong>Solara Reach</strong><span>白名单触达平台</span></div>
+        </div>
+        <nav id="nav">
+          <button class="nav-item active" data-page="overview"><span>01</span>工作台</button>
+          <button class="nav-item" data-page="upload"><span>02</span>上传名单</button>
+          <button class="nav-item" data-page="batches"><span>03</span>批次记录</button>
+          <button class="nav-item" data-page="strategies"><span>04</span>策略配置</button>
+        </nav>
+        <div class="sidebar-note">
+          <span class="pulse"></span>
+          <div><strong>模拟环境</strong><small>未连接 TIDE，数据不会外发</small></div>
+        </div>
+        <div class="profile">
+          <div class="avatar">汪</div>
+          <div><strong>汪潜</strong><span id="roleText">Admin</span></div>
+          <button id="roleToggle" title="切换只读视图">切换</button>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div><p class="eyebrow" id="pageEyebrow">OPERATIONS OVERVIEW</p><h1 id="pageTitle">触达工作台</h1></div>
+          <div class="top-actions"><span class="date-chip">2026年10月16日</span><button class="primary compact" data-goto="upload">＋ 新建导入</button></div>
+        </header>
+
+        <section class="page-view active" id="page-overview">
+          <div class="notice"><span>安全策略已启用</span><p>原始文件解析后自动销毁，手机号默认脱敏，操作记录保留 180 天。</p><button data-goto="upload">开始导入 →</button></div>
+          <div class="metric-grid">
+            <article class="metric-card"><div class="metric-label">今日导入</div><strong>8,460</strong><span class="trend up">↑ 12.4%</span><small>3 个批次</small></article>
+            <article class="metric-card"><div class="metric-label">处理中</div><strong>2,730</strong><span class="trend neutral">32.3%</span><small>预计 2h 后完成</small></article>
+            <article class="metric-card"><div class="metric-label">外呼接通</div><strong>42.8%</strong><span class="trend up">↑ 3.1%</span><small>较昨日</small></article>
+            <article class="metric-card"><div class="metric-label">短信送达</div><strong>96.2%</strong><span class="trend down">↓ 0.6%</span><small>较昨日</small></article>
+          </div>
+          <div class="dashboard-grid">
+            <article class="panel chart-panel">
+              <div class="panel-head"><div><p class="eyebrow">LAST 7 DAYS</p><h2>触达表现</h2></div><div class="legend"><span><i class="blue"></i>外呼接通</span><span><i class="green"></i>短信送达</span></div></div>
+              <div class="chart" aria-label="近七日触达趋势图">
+                <div class="y-labels"><span>100%</span><span>75%</span><span>50%</span><span>25%</span><span>0</span></div>
+                <svg viewBox="0 0 700 250" role="img">
+                  <defs><linearGradient id="area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3867ff" stop-opacity=".28"/><stop offset="1" stop-color="#3867ff" stop-opacity="0"/></linearGradient></defs>
+                  <g class="grid-lines"><line x1="0" y1="10" x2="700" y2="10"/><line x1="0" y1="68" x2="700" y2="68"/><line x1="0" y1="126" x2="700" y2="126"/><line x1="0" y1="184" x2="700" y2="184"/><line x1="0" y1="242" x2="700" y2="242"/></g>
+                  <path class="area" d="M0 160 L115 142 L230 151 L345 118 L460 125 L575 92 L700 104 L700 242 L0 242Z"/>
+                  <path class="line blue-line" d="M0 160 L115 142 L230 151 L345 118 L460 125 L575 92 L700 104"/>
+                  <path class="line green-line" d="M0 30 L115 26 L230 34 L345 28 L460 20 L575 25 L700 18"/>
+                </svg>
+                <div class="x-labels"><span>10/10</span><span>10/11</span><span>10/12</span><span>10/13</span><span>10/14</span><span>10/15</span><span>今天</span></div>
+              </div>
+            </article>
+            <article class="panel status-panel">
+              <div class="panel-head"><div><p class="eyebrow">TODAY</p><h2>任务状态</h2></div><button class="text-button" data-goto="batches">查看全部</button></div>
+              <div class="donut-wrap"><div class="donut"><div><strong>8,460</strong><span>总记录</span></div></div><div class="status-list"><p><span><i class="green"></i>已完成</span><strong>4,982</strong></p><p><span><i class="blue"></i>处理中</span><strong>2,730</strong></p><p><span><i class="amber"></i>待执行</span><strong>612</strong></p><p><span><i class="red"></i>失败</span><strong>136</strong></p></div></div>
+            </article>
+          </div>
+          <article class="panel recent-panel"><div class="panel-head"><div><p class="eyebrow">RECENT BATCHES</p><h2>最近批次</h2></div><button class="text-button" data-goto="batches">查看全部 →</button></div><div class="table-wrap"><table><thead><tr><th>批次</th><th>策略</th><th>执行模式</th><th>名单</th><th>进度</th><th>状态</th><th></th></tr></thead><tbody id="recentBatchRows"></tbody></table></div></article>
+        </section>
+
+        <section class="page-view" id="page-upload">
+          <div class="stepper"><div class="step active" data-step="1"><b>1</b><span>上传文件</span></div><i></i><div class="step" data-step="2"><b>2</b><span>校验名单</span></div><i></i><div class="step" data-step="3"><b>3</b><span>选择策略</span></div><i></i><div class="step" data-step="4"><b>4</b><span>确认提交</span></div></div>
+          <div class="wizard-card">
+            <div class="wizard-step active" id="wizard-1">
+              <div class="wizard-copy"><p class="eyebrow">STEP 01</p><h2>上传加密白名单</h2><p>支持双层加密 ZIP，压缩包内应包含一个 Excel 文件。密码仅用于本次解析，不会保存。</p></div>
+              <label class="dropzone" id="dropzone"><input type="file" id="fileInput" accept=".zip"/><div class="upload-icon">⇧</div><strong id="fileName">拖放 ZIP 文件到这里</strong><span>或点击选择文件 · 最大 20 MB</span></label>
+              <button class="sample-link" id="loadSample">载入样例 MX03-wl-260820.zip</button>
+              <div class="field"><label for="password">文件密码</label><div class="password-wrap"><input id="password" type="password" placeholder="输入 ZIP / Excel 密码"/><button id="showPassword">显示</button></div><small>若 ZIP 和 Excel 密码不同，解析时将分别询问。</small></div>
+              <div class="wizard-actions"><span></span><button class="primary" id="parseFile" disabled>安全解析文件</button></div>
+            </div>
+
+            <div class="wizard-step" id="wizard-2">
+              <div class="wizard-copy"><p class="eyebrow">STEP 02</p><h2>校验解析结果</h2><p>已完成双层解密。原始文件将在确认提交后立即销毁。</p></div>
+              <div class="file-summary"><div class="file-badge">ZIP</div><div><strong>MX03-wl-260820.zip</strong><span>108.7 KB · Sheet0 · 2 个字段</span></div><div class="success-mark">✓ 解析成功</div></div>
+              <div class="validation-grid"><article><span>读取记录</span><strong>3,000</strong><small>mobile + name</small></article><article><span>有效号码</span><strong>3,000</strong><small>10 位数字</small></article><article><span>文件内重复</span><strong>0</strong><small>已自动去重</small></article><article class="warn"><span>历史重复</span><strong>184</strong><small>最近 180 天</small></article></div>
+              <div class="duplicate-choice"><h3>历史重复号码处理</h3><div class="choice-row"><label class="radio-card active"><input type="radio" name="duplicates" value="keep" checked><div><strong>全部继续</strong><span>3,000 人进入策略</span></div></label><label class="radio-card"><input type="radio" name="duplicates" value="exclude"><div><strong>排除历史重复</strong><span>2,816 人进入策略</span></div></label><button class="download-card" id="downloadDuplicates"><strong>↓ 下载重复清单</strong><span>184 条 · CSV</span></button></div></div>
+              <div class="preview-table"><div class="table-title"><h3>名单预览</h3><span>仅展示前 4 条，手机号已脱敏</span></div><table><thead><tr><th>序号</th><th>手机号</th><th>姓名</th><th>校验</th><th>历史记录</th></tr></thead><tbody><tr><td>001</td><td>48••••••23</td><td>RA••AS</td><td><span class="tag success">有效</span></td><td>无</td></tr><tr><td>002</td><td>46••••••17</td><td>SA••HA</td><td><span class="tag success">有效</span></td><td><span class="tag warning">重复</span></td></tr><tr><td>003</td><td>22••••••60</td><td>AN••EZ</td><td><span class="tag success">有效</span></td><td>无</td></tr><tr><td>004</td><td>73••••••46</td><td>SE••OR</td><td><span class="tag success">有效</span></td><td>无</td></tr></tbody></table></div>
+              <div class="wizard-actions"><button class="secondary" data-back="1">上一步</button><button class="primary" data-next="3">确认名单，选择策略</button></div>
+            </div>
+
+            <div class="wizard-step" id="wizard-3">
+              <div class="wizard-copy"><p class="eyebrow">STEP 03</p><h2>选择触达策略</h2><p>最多选择 3 套已启用策略。策略内部执行规则由 TIDE 管理。</p></div>
+              <div class="mode-switch"><button class="active" data-mode="split"><strong>名单分流</strong><span>每个人只进入一个策略</span></button><button data-mode="overlap"><strong>同名单多策略</strong><span>同一批人执行所有策略</span></button></div>
+              <div id="overlapWarning" class="risk-warning hidden"><strong>重复触达风险</strong><span>同一联系人可能收到多次外呼或消息，请确认符合当前业务规则。</span></div>
+              <div class="strategy-select-list" id="strategySelectList"></div>
+              <div class="allocation-summary"><div><span>执行模式</span><strong id="modeSummary">名单分流</strong></div><div><span>参与名单</span><strong id="peopleSummary">3,000 人</strong></div><div><span>预计执行记录</span><strong id="recordSummary">3,000 条</strong></div></div>
+              <div class="wizard-actions"><button class="secondary" data-back="2">上一步</button><button class="primary" id="toConfirm" disabled>检查并确认提交</button></div>
+            </div>
+
+            <div class="wizard-step" id="wizard-4">
+              <div class="wizard-copy"><p class="eyebrow">STEP 04</p><h2>确认执行计划</h2><p>请核对本次提交。正式环境提交后，TIDE 将按照所选策略开始执行。</p></div>
+              <div class="confirm-layout"><div class="confirm-main"><h3>MX03 · 2026-10-16</h3><dl><div><dt>源文件</dt><dd>MX03-wl-260820.zip</dd></div><div><dt>有效名单</dt><dd id="confirmPeople">3,000 人</dd></div><div><dt>执行模式</dt><dd id="confirmMode">名单分流</dd></div><div><dt>预计记录</dt><dd id="confirmRecords">3,000 条</dd></div><div><dt>原始文件</dt><dd class="secure">确认后立即销毁</dd></div></dl></div><div class="confirm-strategies"><h3>策略分配</h3><div id="confirmStrategyList"></div></div></div>
+              <label class="confirm-check hidden" id="riskConfirm"><input type="checkbox" id="riskCheckbox"><span>我确认同一用户可能被多套策略重复触达</span></label>
+              <label class="confirm-check"><input type="checkbox" id="submitCheckbox"><span>我已核对名单、策略及执行数量，确认提交模拟任务</span></label>
+              <div class="wizard-actions"><button class="secondary" data-back="3">返回修改</button><button class="primary" id="submitBatch" disabled>确认提交</button></div>
+            </div>
+
+            <div class="wizard-step success-screen" id="wizard-success"><div class="success-orbit"><span>✓</span></div><p class="eyebrow">SUBMITTED</p><h2>批次已创建</h2><p>模拟批次 <strong>MX03-20261016-004</strong> 已进入待执行队列。原始文件已标记销毁。</p><div class="success-actions"><button class="secondary" data-goto="batches">查看批次详情</button><button class="primary" id="newUpload">继续导入</button></div></div>
+          </div>
+        </section>
+
+        <section class="page-view" id="page-batches">
+          <div class="toolbar"><div class="search"><span>⌕</span><input id="batchSearch" placeholder="搜索批次编号或文件名"/></div><select id="statusFilter"><option value="all">全部状态</option><option value="执行中">执行中</option><option value="已完成">已完成</option><option value="待执行">待执行</option><option value="部分失败">部分失败</option></select><button class="primary compact" data-goto="upload">＋ 新建导入</button></div>
+          <article class="panel batch-table-panel"><div class="table-wrap"><table><thead><tr><th>批次信息</th><th>提交时间</th><th>执行模式</th><th>策略数</th><th>原始名单</th><th>执行记录</th><th>完成率</th><th>状态</th><th></th></tr></thead><tbody id="batchRows"></tbody></table></div></article>
+        </section>
+
+        <section class="page-view" id="page-strategies">
+          <div class="strategy-intro"><div><p class="eyebrow">TIDE PLAYBOOKS</p><h2>策略 ID 映射</h2><p>平台仅维护第三方策略 ID 与业务说明。轮次、话术和消息模板仍由 TIDE 后台管理。</p></div><button class="primary" id="addStrategy">＋ 新增策略映射</button></div>
+          <div class="strategy-grid" id="strategyGrid"></div>
+        </section>
+      </main>
+    </div>
+
+    <dialog id="batchDialog"><div class="dialog-head"><div><p class="eyebrow">BATCH DETAIL</p><h2 id="dialogTitle">批次详情</h2></div><button class="close-dialog">×</button></div><div id="dialogContent"></div></dialog>
+    <dialog id="strategyDialog"><div class="dialog-head"><div><p class="eyebrow">STRATEGY MAPPING</p><h2>新增策略映射</h2></div><button class="close-dialog">×</button></div><form id="strategyForm"><div class="form-grid"><label>显示名称<input required id="strategyName" placeholder="例如：墨西哥拉新－单天"></label><label>TIDE 策略 ID<input required id="strategyId" placeholder="例如：TIDE-MX-ONEDAY-01"></label><label>持续时间<select id="strategyDuration"><option>单天</option><option>三天</option></select></label><label>运行环境<select id="strategyEnv"><option>正式</option><option>测试</option></select></label></div><label>渠道说明<input required id="strategyChannels" placeholder="例如：AI 外呼 + 短信"></label><label>备注<textarea id="strategyNote" rows="3" placeholder="供 Admin 识别策略，不影响 TIDE 内部配置"></textarea></label><div class="wizard-actions"><button type="button" class="secondary close-dialog">取消</button><button class="primary" type="submit">保存映射</button></div></form></dialog>
+    <div id="toast" role="status"></div>
+    <script src="./app.js"></script>
+  </body>
+</html>
