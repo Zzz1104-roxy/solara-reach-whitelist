@@ -1,0 +1,21 @@
+.detail-tabs button{cursor:pointer;transition:.18s}
+.detail-tabs button:hover{border-color:#9bb0f6;color:var(--blue)}
+#detailPanel{min-height:210px}
+.detail-compare{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.detail-compare article{border:1px solid var(--line);border-radius:11px;padding:17px}
+.detail-compare span,.detail-compare small{display:block;color:#818b9e;font-size:9px}
+.detail-compare strong{display:block;font-size:25px;margin:12px 0 3px}
+.detail-compare p{font-size:9px;color:#778296;margin:11px 0 0}
+.mini-bar{height:5px;background:#edf0f5;border-radius:4px;margin-top:11px;overflow:hidden}
+.mini-bar i{display:block;height:100%;background:var(--blue);border-radius:4px}
+.detail-filter{display:flex;align-items:center;justify-content:space-between;margin-bottom:5px;color:#929bad;font-size:9px}
+.detail-filter button{border:0;background:#edf2ff;color:var(--blue);border-radius:6px;padding:7px 9px;font-size:9px}
+.callback-list{border:1px solid var(--line);border-radius:11px;margin-top:14px;padding:4px 16px}
+.callback-list>div{display:grid;grid-template-columns:9px 1fr auto;align-items:center;gap:10px;padding:14px 0;border-bottom:1px solid #edf0f4}
+.callback-list>div:last-child{border:0}
+.callback-list i{width:8px;height:8px;border-radius:50%}
+.callback-list strong,.callback-list small{display:block}
+.callback-list strong{font-size:10px}
+.callback-list small{font-size:8px;color:#9099aa;margin-top:4px}
+.callback-list code{font-size:8px;color:#657189;background:#f3f5f8;border-radius:5px;padding:5px 7px}
+@media(max-width:600px){.detail-compare{grid-template-columns:1fr}.detail-tabs{overflow:auto}.detail-tabs button{white-space:nowrap}}
